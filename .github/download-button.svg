@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="150" viewBox="0 0 640 150" role="img" aria-label="Download the baked. fully baked tool">
+  <rect x="3" y="3" width="634" height="144" rx="72" fill="#ECE5D6" stroke="#121110" stroke-width="6"/>
+  <circle cx="75" cy="75" r="46" fill="#121110"/>
+  <path d="M75 52v40M57 76l18 18 18-18" fill="none" stroke="#ECE5D6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="146" y="76" font-family="'Times New Roman', Times, serif" font-size="60" fill="#121110">download.</text>
+  <circle cx="155" cy="103" r="7" fill="#E6B91E"/>
+  <text x="172" y="111" font-family="'Times New Roman', Times, serif" font-size="25" font-style="italic" fill="#7A7266">every baked. mod in one click, for windows</text>
+</svg>

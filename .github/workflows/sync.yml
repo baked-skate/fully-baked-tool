@@ -1,0 +1,28 @@
+name: Sync baked. packages
+
+# Every 6 hours, adds any baked. package on Thunderstore that modlist.json is missing.
+# FullyBaked.bat reads modlist.json from main, so players get new packs without a new download.
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add new baked. packages
+        run: node .github/sync-baked.mjs
+
+      - name: Commit
+        run: |
+          git diff --quiet && exit 0
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "chore(modlist): add new baked. packages"
+          git push

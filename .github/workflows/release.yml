@@ -1,0 +1,35 @@
+name: Release
+
+# Push a tag like v1.0.0 to publish FullyBaked.bat, zipped, as a release.
+# Zipped because browsers warn on a bare .bat download.
+# The README's button links to releases/latest, so it always gets the newest one.
+# A new mod in modlist.json needs no release: the tool downloads the list each run.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # cmd misreads labels in an LF-only .bat; .gitattributes should keep it CRLF.
+      - name: Check line endings
+        run: |
+          if grep -qv $'\r$' FullyBaked.bat; then
+            echo "::error::FullyBaked.bat has LF line endings; it needs CRLF."
+            exit 1
+          fi
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          zip fully-baked-tool.zip FullyBaked.bat
+          gh release create "$GITHUB_REF_NAME" fully-baked-tool.zip \
+            --title "baked. fully baked tool $GITHUB_REF_NAME" \
+            --notes "Download **fully-baked-tool.zip** below, open it, then double-click FullyBaked.bat. Steps and help: https://github.com/$GITHUB_REPOSITORY#readme"
