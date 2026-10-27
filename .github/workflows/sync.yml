@@ -1,6 +1,7 @@
 name: Sync baked. packages
 
-# Every 6 hours, adds any baked. package on Thunderstore that modlist.json is missing.
+# Every 6 hours, adds any baked. package on Thunderstore that modlist.json is missing,
+# and crew packs from the teams in sync-baked.mjs that have "baked" in their name.
 # FullyBaked.bat reads modlist.json from main, so players get new packs without a new download.
 on:
   schedule:
